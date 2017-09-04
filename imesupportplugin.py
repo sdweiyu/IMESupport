@@ -518,6 +518,9 @@ class ImeSupportEventListener(sublime_plugin.EventListener):
             self.layouts[id].update_status(view)
             pos = self.layouts[id].calc_cursor_position(view, view.sel()[0].a)
 
+        scaling = self.layouts[id].get_setting('imesupport_high_dpi_scaling_in_win10', 1)
+        pos = ( (int)(scaling* pos[0]),  (int)(scaling* pos[1]),  pos[2], (int)(scaling* pos[3]))
+
         set_pos(window.hwnd(), pos)
 
 
